@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Calcu</title>
+
+    <style>
+        .container {
+            border: 2px solid black;
+            width: 100%;
+            height: 100%;
+            margin-top: 1%;
+            border-radius: 10px;
+        }
+
+        .top {
+            background-color: grey;
+            border-top-right-radius: 8px;
+            border-top-left-radius: 8px;
+        }
+
+        .time {
+            text-align: left;
+            margin-left: 2%;
+        }
+
+        .time p {
+            text-align: right;
+            margin-top: -15px;
+            margin-right:1%;
+        }
+        .container input{
+            border:none;
+            margin:5px;
+            width:97.5%;
+            height:120px;
+            font-size:55px;
+            text-align:right;
+        }
+        .button{
+            margin-left:1%;
+            margin-top:-12px;
+            margin-bottom:8px;
+        }
+        .button input{
+            width:20%;
+            height:72px;
+            text-align:center;
+            font-size: 23px;
+            border-radius:100%;
+            /*border:1px solid ;*/
+        }
+        .button input:hover{
+            background-color:skyblue;
+        }
+        .container h2{
+            color:red;
+        }
+        .color{
+            background-color:orange;
+            font-weight:bold;
+        }
+        .name{
+            margin-left:25%;
+        }
+    </style>
+</head>
+<!--Create a calculator-->
+
+<body>
+    <div class="container">
+        <div class="top">
+            <div class="time">
+                <span id="current-time">Time</span>
+                <span class="name">Dj</span>
+                <p id="battery-level"><span id="level">N/A</span></p>
+            </div>
+        </div>
+        <center>
+        <div id="calc">
+            <marquee><h2>Calcu Made with Fun!!</h2></marquee>
+            <input type="textview" id="result"><br>
+            </center><br>
+            <div class="button">
+                <center>
+                    <hR>
+                    <input type="button" class="color" value="C" onclick="clr()">
+                    <input type="button" class="color" value="%" onkeydown="my(event)" onclick="dis('%')">
+                    <input type="button" class="color" value="/" onkeydown="my(event)" onclick="dis('/')">
+                    <input type="button" class="color" value="#" onkeydown="my(event)" onclick="backspace()">
+                    <input type="button" value="7" onkeydown="my(event)" onclick="dis('7')">
+                    <input type="button" value="8" onkeydown="my(event)" onclick="dis('8')">
+                    <input type="button" value="9" onkeydown="my(event)" onclick="dis('9')">
+                    <input type="button" class="color" value="x" onkeydown="my(event)" onclick="dis('*')">
+                    <input type="button" value="4" onkeydown="my(event)" onclick="dis('4')">
+                    <input type="button" value="5" onkeydown="my(event)" onclick="dis('5')">
+                    <input type="button" value="6" onkeydown="my(event)" onclick="dis('6')">
+                    <input type="button" class="color" value="-" onkeydown="my(event)" onclick="dis('-')">
+                    <input type="button" value="1" onkeydown="my(event)" onclick="dis('1')">
+                    <input type="button" value="2" onkeydown="my(event)" onclick="dis('2')">
+                    <input type="button" value="3" onkeydown="my(event)" onclick="dis('3')">
+                    <input type="button" class="color" value="+" onkeydown="my(event)" onclick="dis('+')">
+                    <input type="button" value="00"onkeydown="my(event)" onclick="dis('00')">
+                    <input type="button" value="0" onkeydown="my(event)" onclick="dis('0')">
+                    <input type="button" value="." onkeydown="my(event)" onclick="dis('.')">
+                    <input type="button" class="color" value="=" onkeydown="my(event)" onclick="equal()">
+                    
+                </center>
+            </div>
+        </div>
+    </div>
+    </center>
+</body>
+<script>
+    // Check if Battery Status API is supported
+    if ('getBattery' in navigator) {
+        navigator.getBattery().then(function (battery) {
+            // Update battery level
+            function updateBatteryStatus() {
+                document.getElementById('level').textContent = `${ (battery.level * 100).toFixed(0) }%`;
+            }
+            // Initial update
+            updateBatteryStatus();
+            // Update when the battery level changes
+            battery.addEventListener('levelchange', updateBatteryStatus);
+        });
+    } else {
+        document.getElementById('battery-level').textContent = 'Battery Status API not supported';
+    }
+</script>
+<script>
+   function updateCurrentTime() {
+      const currentTimeElement = document.getElementById('current-time');
+      const now = new Date();
+      let hours = now.getHours();
+      const minutes = now.getMinutes().toString().padStart(2, '0');
+      const seconds = now.getSeconds().toString().padStart(2, '0');
+      const period = hours >= 12 ? 'PM' : 'AM';
+
+      // Convert hours to 12-hour format
+      hours = hours % 12 || 12;
+
+      currentTimeElement.textContent = `${hours}:${minutes}:${seconds} ${period}`;
+    }
+
+    // Initial update
+    updateCurrentTime();
+
+    // Update every second
+    setInterval(updateCurrentTime, 1000);
+</script>
+<script>
+
+    function dis(val){
+        document.getElementById("result").value += val
+    }
+
+    function my(event){
+        if(event.key == '0' ||
+           event.key == '1' ||
+           event.key == '2' ||
+           event.key == '3' ||
+           event.key == '4' ||
+           event.key == '5' ||
+           event.key == '6' ||
+           event.key == '7' ||
+           event.key == '8' ||
+           event.key == '9' ||
+           event.key == '+' ||
+           event.key == '-' ||
+           event.key == '*' ||
+           event.key == '/' ||
+           event.key == '%' ||
+           event.key == '.' ||
+           event.key == '00')
+            document.getElementById("result").value += event.key;
+    }
+
+    var cal = document.getElementById("calc");
+    cal.onkeyup = function(event){
+        if(event.keyCode === 00){
+            console.log("Enter");
+            let a = document.getElementById("result").value
+            console.log(a);
+            equal();
+        }
+    }
+
+    function equal(){
+        let a = document.getElementById("result").value
+        let b = eval(a);
+        document.getElementById("result").value = b;
+    }
+    function clr(){
+        document.getElementById("result").value = ""
+    }
+    function backspace() {
+    var rekensom = document.getElementById('result'). value;
+    document. getElementById('result'). value=rekensom. substring(0,rekensom. length -1)};
+   
+</script>
+  <script>
+    // Check if localStorage is supported
+    if (typeof(Storage) !== 'undefined') {
+      // Retrieve visit count from localStorage or initialize to 85
+      let visitCount = localStorage.getItem('visitCount') || 0;
+
+      // Update visit count on the page
+      const visitCountElement = document.getElementById('visit-count');
+      visitCountElement.textContent = visitCount;
+
+      // Increment visit count on each visit
+      visitCount++;
+      localStorage.setItem('visitCount', visitCount.toString());
+    } else {
+      // If localStorage is not supported, display a message
+      //document.write("Sorry, your browser does not support web storage.");
+    }
+  </script>
+
+
+</html>
