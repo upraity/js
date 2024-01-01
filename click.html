@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Click The Btn</title>
+    <style>
+        button {
+            font-size: 1.5em;
+            padding: 10px;
+            cursor: pointer;
+            position: absolute;
+        }
+        .container {
+            border: 2px solid black;
+            width: 100%;
+            height: 100%;
+            margin-top: 1%;
+            border-radius: 10px;
+        }
+
+        .top {
+            background-color: grey;
+            border-top-right-radius: 8px;
+            border-top-left-radius: 8px;
+        }
+
+        .time {
+            text-align: left;
+            margin-left: 2%;
+        }
+
+        .time p {
+            text-align: right;
+            margin-top: -15px;
+            margin-right:1%;
+        }
+        .name{
+            margin-left:35%;
+        }
+        .game h2{
+            text-align: center;
+            color:rgb(36, 117, 209);
+        }
+        .game .box{
+            border:1px solid black;
+            height:520px;
+            margin:1.5%;
+        }
+        .box button{
+            height:10%;
+            font-size:20px;
+            margin:2%;
+        }
+        .game  h3{
+            text-align: center;
+        }
+    </style>
+</head>
+<!--Create a -->
+
+<body>
+    <div class="container">
+        <div class="top">
+            <div class="time">
+                <span id="current-time">Time</span>
+                <span class="name">Dj</span>
+                <p id="battery-level"><span id="level">N/A</span></p>
+            </div>
+        </div>
+        <div class="game">
+            <h2>Click the box & increase your score!!</h2>   
+            <div class="box">            
+            <button id="randomButton" onclick="handleButtonClick()">Click Me</button>
+            </div>
+            <h3><span id="scoreDisplay">Score: 0</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span id="highestScoreDisplay">Highest Score: 0</span></h3>
+        </div>
+        </div>
+    </div>
+</body>
+<script>
+    // Check if Battery Status API is supported
+    if ('getBattery' in navigator) {
+        navigator.getBattery().then(function (battery) {
+            // Update battery level
+            function updateBatteryStatus() {
+                document.getElementById('level').textContent = `${ (battery.level * 100).toFixed(0) }%`;
+            }
+            // Initial update
+            updateBatteryStatus();
+            // Update when the battery level changes
+            battery.addEventListener('levelchange', updateBatteryStatus);
+        });
+    } else {
+        document.getElementById('battery-level').textContent = 'Battery Status API not supported';
+    }
+</script>
+<script>
+    function updateCurrentTime() {
+      const currentTimeElement = document.getElementById('current-time');
+      const now = new Date();
+      const hours = now.getHours().toString().padStart(2, '0');
+      const minutes = now.getMinutes().toString().padStart(2, '0');
+      const seconds = now.getSeconds().toString().padStart(2, '0');
+
+      currentTimeElement.textContent = `${hours}:${minutes}`;
+    }
+
+    // Initial update
+    updateCurrentTime();
+
+    // Update every second
+    setInterval(updateCurrentTime, 1000);
+  </script>
+    <script>
+        let score = 0;
+        // Load the highest score from localStorage
+        let highestScore = localStorage.getItem('highestScore') || 0;
+        function handleButtonClick() {
+            score++;
+            updateScore();
+            moveButtonRandomly();
+            // Check if the current score is higher than the highest score
+            if (score > highestScore) {
+                highestScore = score;
+                updateHighestScore();
+            }
+        }
+    
+        function updateScore() {
+        const randomButton = document.getElementById('randomButton');
+        randomButton.textContent = `Click Me`;
+        const scoreDisplay = document.getElementById('scoreDisplay');
+        scoreDisplay.textContent = `Score: ${score}`;
+        }
+        
+        function updateHighestScore() {
+            const highestScoreDisplay = document.getElementById('highestScoreDisplay');
+            highestScoreDisplay.textContent = `Highest Score: ${highestScore}`;
+
+            // Save the highest score to localStorage
+            localStorage.setItem('highestScore', highestScore);
+        }
+
+        // Reload the score on page load
+        window.onload = function() {
+          updateScore();
+          updateHighestScore();
+        };
+
+        //Show "Game Over" alert when clicking outsite the button
+        document.addEventListener('click', function(event){
+            const isbtn = event.target.id === 'randomButton';
+            if(!isbtn){
+                alert("Game Over!!\nScore: "+score +"\nHigh Score: " +highestScore);
+                location.reload();
+            }
+        })
+    
+        function moveButtonRandomly() {
+          const randomButton = document.getElementById('randomButton');
+          const maxX = window.innerWidth - randomButton.clientWidth;
+          const maxY = window.innerHeight - randomButton.clientHeight;
+    
+          const newX = Math.random() * maxX;
+          const newY = Math.random() * maxY;
+    
+          randomButton.style.left = `${newX}px`;
+          randomButton.style.top  = `${newY}px`;
+        }
+      </script>
+ </html>
