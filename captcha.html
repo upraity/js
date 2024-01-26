@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Captcha</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Times New Roman', Times, serif;
+        }
+
+        .reload{
+            rotate: -90deg;
+        }
+
+        body{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background: blueviolet;
+        }
+
+        .box{
+            max-width: 485px;
+            width: 100%;
+            background: #fff;
+            padding: 22px 30px 40px;
+            border-radius: 10px;
+            box-shadow: 8px 8px 8px rgba(0,0,0,0.05);
+        }
+
+        .box h3{
+            color: #000;
+            font-size: 33px;
+            font-weight: 550px;
+            text-align: center;
+        }
+
+        .box .captcha-area{
+            display: flex;
+            height: 65px;
+            margin: 30px 0 20px;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .box .captcha-area .captcha-img{
+            height: 100%;
+            width: 80%;
+            user-select: none;
+             background: #000;
+             border-radius: 5px;
+             position: relative;
+        }
+
+        .captcha-img img{
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 5px;
+            opacity: 0.95;
+        }
+
+        .captcha-img .captcha{
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            width: 100%;
+            opacity: 0.5;
+            font-size: 35px;
+            font-style:italic;
+            text-align: center;
+            color: blueviolet;
+            letter-spacing: 30px;
+            transform: translate(-50%, -50%);
+            text-shadow: 0 0 2px #b1b1b1;
+            font-family: monospace, Georgia, Times, 'Times New Roman', serif;
+        }
+
+        .box button{
+            outline: none;
+            border: none;
+            color: #fff;
+            cursor: pointer;
+            background: blueviolet;
+            border-radius: 5px;
+            transition: all 0.3s ease; 
+        }
+
+        .box button:hover{
+            background: blueviolet;
+        }
+
+        .captcha-area .reload{
+            width: 60px;
+            height: 100%;
+            font-size: 35px;
+        }
+
+        .reload p{
+            transition: transform 0.3s ease;
+        }
+
+        .reload:hover p{ 
+            transform: rotate(-15deg);
+        }
+
+        .box .input{
+            height: 50px;
+            width: 100%;
+            position: relative;
+        }
+
+        .input input{
+            width: 100%;
+            height: 55px;
+            outline: none;
+            padding-left: 20px;
+            font-size: 20px;
+            border-radius: 5px;
+            letter-spacing: 5px;
+            border: 1px solid blueviolet;
+        }
+
+        .input input:is(:focus, :valid){
+            padding-left: 20px;
+            border: 2px solid #bfbfbf;
+        }
+
+        .input input::placeholder{
+            color:#bfbfbf;
+        }
+
+        .input .check{
+            position: absolute;
+            right: -35px;
+            top: 9%;
+            font-size: 17px;
+            height: 45px;
+            padding: 20px;
+            opacity: 0;
+            pointer-events: none;
+            transform: translate(-50%);
+        }
+
+        .input input:valid+.check{
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .box .status{
+            display:none;
+            font-size: 18px;
+            text-align: center;
+            margin: 20px 0 -5px;
+        }
+
+        .check p{
+            margin-top: -6px;
+            font-size:20px;
+
+        }
+
+        @media(max-width:506px){
+            body{
+                padding: 0 10px;
+            }
+            .box{
+                padding: 22px 25px 35px;
+            }
+            .box h3{
+                font-size: 25px;
+            }
+            .box .captcha-area{
+                height: 60px;
+            }
+            .captcha-area .captcha{
+                font-size: 28px;
+                letter-spacing: 5px;
+            }
+            .captcha-area .reload{
+                width: 60px;
+                margin-left:5px;
+                font-size: 20px;
+            }
+            .box .check{
+                height: 40px;
+            }
+            .box .status{
+                font-size: 15px;
+            }
+            .captcha-area .captcha-img{
+                width: 250px;
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <div class="box">
+        <h3>Captcha Using Js</h3>
+        <div class="captcha-area">
+            <div class="captcha-img">
+                <img src="captcha-img.png" alt="Captcha Background">
+                <span class="captcha"></span>
+            </div>
+            <button class="reload"><b><p>&#8634;</p></b></button>
+        </div>
+        <form action="#" class="input">
+            <input type="text" placeholder="Enter Captcha" maxlength="6" spellcheck="false" required>
+            <button class="check"><p>Check</p></button>
+        </form>
+        <div class="status"></div>
+    </div>
+    <script>
+        const captcha = document.querySelector(".captcha"),
+        reloadbtn = document.querySelector(".reload "),
+        input = document.querySelector(".input input"),
+        checkbtn = document.querySelector(".check"),
+        status = document.querySelector(".status");
+
+        let allchar = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z','a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z',1,2,3,4,5,6,7,8,9,'0'];
+        function getCaptcha(){
+            for(let i=0; i<6; i++){
+                let randomChar = allchar[Math.floor(Math.random()* allchar.length)];
+                captcha.innerText += `${randomChar}`;
+            }
+        }
+        getCaptcha();
+
+        reloadbtn.addEventListener("click",()=>{
+            removeContent();
+            getCaptcha();
+        });
+
+        function removeContent() {
+            captcha.innerText = ""; 
+            input.value = ""; 
+            status.style.display = "none"; 
+        }
+
+        checkbtn.addEventListener("click",e =>{
+            e.preventDefault();
+            status.style.display = "block";
+            
+            let inputVal = input.value.split('').join('');
+            if(inputVal == captcha.innerText){
+                status.textContent = "Captcha is correct!";
+            status.style.color = "green";
+            }
+            else{
+            status.textContent = "Captcha is incorrect. Please try again.";
+            status.style.color = "red";
+            input.value = "";
+            }
+        })
+    </script>
+</body>
+</html>
