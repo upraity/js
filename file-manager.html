@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <title>Navigation Bar</title>
+  <style type="text/css">
+  body {
+  margin: 0;
+  padding: 0;
+  }
+
+  .top-nav {
+  background-color: black;
+  color: white;
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  }
+
+  .menu-btn {
+  background-color: transparent;
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-size: 1.4em;
+  margin-left: auto;
+  font-weight: bold;
+  }
+  
+  .menu-btn2 {
+  background-color: transparent;
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-size: 1.4em;
+  margin-left: auto;
+  font-weight: bold;
+  }
+
+  .logo {
+  max-width: 30px;
+  margin-left:0;
+  }
+  
+  .submenu {
+    display: none;
+    position: absolute;
+    top: 55px;
+    right: 10px;
+    background-color: grey;
+    font-size: 20px;
+    padding: 10px;
+    width: 90px;
+    text-align: center;
+}
+  
+  .submenu ul {
+  list-style-type: none;
+  padding: 0;
+  }
+  
+  .submenu ul li {
+  margin-bottom: 5px;
+  cursor: pointer;
+  }
+  
+  
+  .submenu2 {
+    display: none;
+    position: absolute;
+    top: -165px;
+    left: 5px;
+    background-color: grey;
+    font-size: 20px;
+    padding: 10px;
+    width: 90px;
+    text-align: center;
+}
+
+.submenu3 {
+    display: none;
+    position: absolute;
+    top: -85px;
+    right: 25px;
+    background-color: grey;
+    font-size: 20px;
+    padding: 10px;
+    width: 90px;
+    text-align: center;
+}
+
+.submenu4 {
+    display: none;
+    position: absolute;
+    top: -85px;
+    left: 120px;
+    background-color: grey;
+    font-size: 20px;
+    padding: 10px;
+    width: 90px;
+    text-align: center;
+}
+
+  .submenu2 ul {
+  list-style-type: none;
+  padding: 0;
+  }
+  
+  .submenu3 ul {
+  list-style-type: none;
+  padding: 0;
+  }
+
+  .submenu4 ul {
+  list-style-type: none;
+  padding: 0;
+  }
+
+  .submenu2 ul li {
+  margin-bottom: 5px;
+  cursor: pointer;
+  }
+
+  .submenu3 ul li {
+  margin-bottom: 5px;
+  cursor: pointer;
+  }
+
+  .submenu4 ul li {
+  margin-bottom: 5px;
+  cursor: pointer;
+  }
+
+  .content {
+  padding: 20px;
+  }
+
+  .back-btn{
+    font-size:1em;
+    background-color: black;
+    border: none;
+    color: white;
+  }
+
+  .forward-btn{
+    font-size:1em;
+  }
+
+  .submenu ul li:hover{
+    color: white;
+    background-color:black;
+  }
+
+  .submenu2 ul li:hover{
+    color: white;
+    background-color:black;
+  }
+
+  .submenu4 ul li:hover{
+    color: white;
+    background-color:black;
+  }
+
+  .footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: black;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    font-size: 16px;
+}
+
+.footer-left,
+.footer-right {
+    display: flex;
+    align-items: center;
+}
+
+.separator {
+    margin: 0 10px;
+}
+
+.button {
+    background-color: transparent;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out;
+    display: flex;
+    align-items: center;
+}
+
+.button i {
+    margin-right: 5px; /* Adjust spacing as needed */
+    font-size: 18px;
+}
+
+.button:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.5);
+}
+
+.add-icon {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white;
+    text-align: center;
+    line-height: 30px;
+    margin-left: 10px;
+}
+
+.add-icon i {
+    font-size: 20px;
+}
+
+.about-link {
+    text-decoration: none;
+    color: white;
+    transition: color 0.2s ease-in-out;
+}
+
+.about-link:hover {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+/* Replace with your theme's font awesome configuration */
+.fas {
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+}
+
+#container {
+  display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0;
+   
+}
+
+#create-file-btn {
+    padding: 0;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+}
+
+#files-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.file-item {
+    border: 1px solid #eee;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #f2f2f2;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+}
+
+.file-item input {
+    width: calc(90% - 50px);
+    margin-right: 10px;
+    border: none;
+    padding: 5px;
+    font-size: 16px;
+}
+
+.file-item .fa-close {
+    color: red;
+    cursor: pointer;
+}
+
+  
+  </style>
+</head>
+<body>
+  <nav class="top-nav">
+    <button class="button bar">
+      <i class="fa-solid fa-less-than"></i>
+    </button>
+    <button class="button bar">
+      <i class="fa-solid fa-greater-than"></i>
+    </button>
+    <img src="7.png" class="logo">
+    <button class="menu-btn" id="menu-btn">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+  </nav>
+
+  <div id="submenu" class="submenu">
+    <ul>
+      <li>Profile</li>
+      <li>Setting</li>
+      <li>Logout</li>
+    </ul>
+  </div>
+
+  <div id="container">
+    <div id="files-container" class="vertical"></div>
+</div>
+
+  <footer class="footer">
+    <div class="footer-left">
+        <span class="separator"></span>
+        <button class="menu-btn2" id="menu-btn2">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+        <div id="submenu2" class="submenu2">
+          <ul>
+            <li>Cut</li>
+            <li>Copy</li>
+            <li>Paste</li>
+            <li>Delete</li>
+          </ul>
+        </div>
+        <abbr title="Download"><button class="button download">
+          <i class="fa-solid fa-download"></i>
+        </button></abbr>
+        <abbr title="Upload"><button class="button upload"><i class="fa-solid fa-upload"></i></button></abbr>
+        <abbr title="New File"><button class="button add" id="menu-btn4"><i class="fa-regular fa-square-plus"></i></button></abbr>
+        <div id="submenu4" class="submenu4">
+          <ul>
+            <li id="create-file-btn">File</li>
+            <!--<li id="create-file-btn">Folder</li>-->
+          </ul>
+        </div>
+    </div>
+    <div class="footer-right">
+        <abbr title="Information"><button class="button bar" id="menu-btn3">
+        <i class="fa-solid fa-info"></i>
+        </button></abbr>
+        <div id="submenu3" class="submenu3">
+          <ul>
+            <li>ArtiZote</li>
+          </ul>
+        </div>
+        <span class="separator"></span>
+    </div>
+</footer>
+
+
+  <script>
+  document.getElementById('menu-btn').addEventListener('click', function() {
+  var submenu = document.getElementById('submenu');
+  if (submenu.style.display === 'none') {
+  submenu.style.display = 'block';
+  } else {
+  submenu.style.display = 'none';
+  }
+  });
+
+  document.getElementById('menu-btn2').addEventListener('click', function() {
+  var submenu2 = document.getElementById('submenu2');
+  if (submenu2.style.display === 'none') {
+  submenu2.style.display = 'block';
+  } else {
+  submenu2.style.display = 'none';
+  }
+  });
+
+  document.getElementById('menu-btn3').addEventListener('click', function() {
+  var submenu3 = document.getElementById('submenu3');
+  if (submenu3.style.display === 'none') {
+  submenu3.style.display = 'block';
+  } else {
+  submenu3.style.display = 'none';
+  }
+  });
+
+  document.getElementById('menu-btn4').addEventListener('click', function() {
+  var submenu4 = document.getElementById('submenu4');
+  if (submenu4.style.display === 'none') {
+  submenu4.style.display = 'block';
+  } else {
+  submenu4.style.display = 'none';
+  }
+  });
+
+const filesContainer = document.getElementById('files-container');
+const createFileBtn = document.getElementById('create-file-btn');
+
+//let fileCount = 0;
+
+createFileBtn.addEventListener('click', () => {
+    const fileName = prompt('Enter name of file:');
+
+    if (fileName && fileName.trim() !== '') { 
+        const newFileDiv = document.createElement('div');
+        newFileDiv.classList.add('file-item');
+
+        const fileInput = document.createElement('input');
+        fileInput.type = 'text';
+        fileInput.value = fileName;
+        newFileDiv.appendChild(fileInput);
+
+        const deleteIcon = document.createElement('i');
+        deleteIcon.classList.add('fas', 'fa-close');
+        deleteIcon.addEventListener('click', () => {
+            filesContainer.removeChild(newFileDiv);
+        });
+        newFileDiv.appendChild(deleteIcon);
+
+        console.log(`File "${fileName}" created.`);
+
+        filesContainer.appendChild(newFileDiv);
+    } else {
+        alert('Please enter  valid file name.');
+    }
+});
+
+</script>
+
+</body>
+</html>
