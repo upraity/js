@@ -15,3 +15,9 @@ function calling3(x, y){
   console.log(x+y);
 }
 calling3(4,5);
+
+//use return 
+function calling4(x, y){
+  return x * y;
+}
+console.log(calling4(3, 5));
