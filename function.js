@@ -21,3 +21,9 @@ function calling4(x, y){
   return x * y;
 }
 console.log(calling4(3, 5));
+
+//Arrow function
+const valueSum = (a, b) => {
+  console.log(a + b);
+}
+valueSum(3, 5);
