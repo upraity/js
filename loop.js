@@ -9,3 +9,10 @@
 for(let i = 0; i <= 5; i++){
   console.log(i + " SabkaCode");
 }
+
+//for-in loop
+let name = {web:'SabkaCode', website:'Htmlify', host:'Artizote'};
+for(n in name){
+    let na = name[n];
+    console.log(na);
+}
