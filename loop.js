@@ -16,3 +16,9 @@ for(n in name){
     let na = name[n];
     console.log(na);
 }
+
+// for-of loop
+const name = ['Ram', 'Shiva', 'Satya'];
+for(let i of name){
+    console.log(i);
+}
