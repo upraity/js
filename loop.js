@@ -34,3 +34,15 @@ while(n>0){
     }
     n--;
 }
+
+// do-while loop
+let n = 4;
+do{
+    if(n != 0){
+        console.log("SabkaCode");
+    }
+    else{
+        console.log("ArtiZote");
+    }
+    n--;
+}while(n>=0);
