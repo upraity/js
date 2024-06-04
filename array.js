@@ -29,3 +29,8 @@ while(i < number.length){
 let number = ['A','B', 'C','D'];
 number.push('E','F');
 console.log(number);
+
+//pop
+let number = ['A','B','C','D'];
+number.pop();
+console.log(number);
