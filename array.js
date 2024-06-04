@@ -11,4 +11,9 @@ let number = [10,9,10,8];
 for(let i=0; i<number.length; i++){
   console.log(number[i]);
 }
-  
+
+//using for of loop
+let number = [10,9,10,8];
+for(i of number){
+  console.log(i);
+}
