@@ -23,3 +23,9 @@ let i=0, number = [10,9,10,8];
 while(i < number.length){
   console.log(number[i]);
 }
+
+//Array Method
+//push
+let number = ['A','B', 'C','D'];
+number.push('E','F');
+console.log(number);
