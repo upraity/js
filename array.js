@@ -24,6 +24,14 @@ while(i < number.length){
   console.log(number[i]);
 }
 
+//using do-while loop
+let i=0, number = [10,9,10,8];
+do{
+  console.log(number[i]);
+  i++;
+}
+while(i < number.length);
+
 //Array Method
 //push
 let number = ['A','B', 'C','D'];
