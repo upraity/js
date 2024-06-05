@@ -42,4 +42,3 @@ console.log(number);
 let number = ['A','B','C','D'];
 number.pop();
 console.log(number);
-
