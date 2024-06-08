@@ -42,3 +42,8 @@ console.log(number);
 let number = ['A','B','C','D'];
 number.pop();
 console.log(number);
+
+//toString()
+let number=["SabkaCode","HTMLify","ArtiZote"];
+ console.log(number.toString());
+ console.log(number);
